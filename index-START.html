@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="keys">
+      <div>
+        <h1>Jackson's Jellicle JamBot</h1>
+      </div>
+      <div class="row1">
+        <div data-key="81" class="key">
+          <kbd>Q</kbd>
+          <span class="sound">Guitar Solo</span>
+        </div>
+        <div data-key="87" class="key">
+          <kbd>W</kbd>
+          <span class="sound">Hi-Hat</span>
+        </div>
+        <div data-key="69" class="key">
+          <kbd>E</kbd>
+          <span class="sound">I think its a shit</span>
+        </div>
+        <div data-key="82" class="key">
+          <kbd>R</kbd>
+          <span class="sound">I LIKE IT</span>
+        </div>
+        <div data-key="84" class="key">
+          <kbd>T</kbd>
+          <span class="sound">It's....</span>
+        </div>
+        <div data-key="89" class="key">
+          <kbd>Y</kbd>
+          <span class="sound">Kick Drum</span>
+        </div>
+        <div data-key="85" class="key">
+          <kbd>U</kbd>
+          <span class="sound">MAMI..</span>
+        </div>
+        <div data-key="73" class="key">
+          <kbd>I</kbd>
+          <span class="sound">record scratch</span>
+        </div>
+        <div data-key="79" class="key">
+          <kbd>O</kbd>
+          <span class="sound">Sex Noise</span>
+        </div>
+        <div data-key="80" class="key">
+          <kbd>P</kbd>
+          <span class="sound">Snare</span>
+        </div>
+      </div>
+      <div class="row2">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">allez viens</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">bass guitar ladder</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">blob</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">burp</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">cutefart</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">digeradoo</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="sound">digeradoo2</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">fart</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="sound">fart2</span>
+        </div>
+      </div>
+      <div class="row3">
+        <div data-key="90" class="key">
+          <kbd>Z</kbd>
+          <span class="sound">Wobble</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>X</kbd>
+          <span class="sound">TBD</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>C</kbd>
+          <span class="sound">TBD</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>V</kbd>
+          <span class="sound">TBD</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>B</kbd>
+          <span class="sound">TBD</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>N</kbd>
+          <span class="sound">TBD</span>
+        </div>
+        <div data-key="90" class="key">
+          <kbd>M</kbd>
+          <span class="sound">TBD</span>
+        </div>
+      </div>
+    </div>
+
+    <audio data-key="65" src="/sounds/allezviens_.mp3"></audio>
+    <audio data-key="83" src="/sounds/bassguitarladder.mp3"></audio>
+    <audio data-key="68" src="/sounds/blobcreaturenoise.mp3"></audio>
+    <audio data-key="70" src="/sounds/burp (1).mp3"></audio>
+    <audio data-key="71" src="/sounds/cutefart.mp3"></audio>
+    <audio data-key="72" src="/sounds/didgeridoo1 (1).mp3"></audio>
+    <audio data-key="74" src="/sounds/didgeridoo2.mp3"></audio>
+    <audio data-key="75" src="/sounds/fart.mp3"></audio>
+    <audio data-key="76" src="/sounds/fart2.mp3"></audio>
+    <audio data-key="81" src="/sounds/guitarsolo.mp3"></audio>
+    <audio data-key="87" src="/sounds/hihat.mp3"></audio>
+    <audio data-key="69" src="/sounds/i think its a shit.mp3"></audio>
+    <audio data-key="82" src="/sounds/ilikeit.mp3"></audio>
+    <audio data-key="84" src="/sounds/it's.....mp3"></audio>
+    <audio data-key="89" src="/sounds/kickdrum.mp3"></audio>
+    <audio data-key="85" src="/sounds/mami.mp3"></audio>
+    <audio data-key="73" src="/sounds/recordscratch.mp3"></audio>
+    <audio data-key="79" src="/sounds/sexnoise.mp3"></audio>
+    <audio data-key="80" src="/sounds/snare.mp3"></audio>
+    <audio data-key="90" src="/sounds/wobble.mp3"></audio>
+
+    <script>
+      window.addEventListener("keydown", function (e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
+
+        if (!audio) return;
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add("playing");
+      });
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return;
+        this.classList.remove("playing");
+      }
+
+      const keys = document.querySelectorAll(".key");
+      keys.forEach((key) =>
+        key.addEventListener("transitionend", removeTransition)
+      );
+    </script>
+  </body>
+</html>
